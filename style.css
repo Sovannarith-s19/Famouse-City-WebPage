@@ -1,0 +1,483 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Work+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --paper: #F2F6F4;
+  --ink: #12292F;
+  --teal: #0F5C6B;
+  --saffron: #F2B134;
+  --rose: #C8466B;
+  --muted: #4d636a;
+  --accent: var(--teal);
+  --hero: linear-gradient(135deg, #0F5C6B, #12292F);
+  --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --sans: 'Work Sans', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+}
+
+body.paris   { --accent:#C8466B; --hero:linear-gradient(160deg,#3b1d3f 0%,#C8466B 55%,#F2B134 120%) }
+body.tokyo   { --accent:#B3262E; --hero:linear-gradient(160deg,#0d1b2a 0%,#1b3a5c 50%,#B3262E 130%) }
+body.newyork { --accent:#0F5C6B; --hero:linear-gradient(160deg,#12292F 0%,#0F5C6B 60%,#F2B134 135%) }
+
+/* One accent + hero gradient per city */
+body.home    .hero{ background-image: linear-gradient(rgba(18,41,47,.55), rgba(18,41,47,.75)), url("images/all_city.jpg"); }
+body.paris   .hero{ background-image: linear-gradient(rgba(59,29,63,.45), rgba(18,41,47,.75)), url("images/paris_city.jpg"); }
+body.tokyo   .hero{ background-image: linear-gradient(rgba(13,27,42,.45), rgba(18,41,47,.75)), url("images/tokyo_city.jpg"); }
+body.newyork .hero{ background-image: linear-gradient(rgba(18,41,47,.45), rgba(18,41,47,.75)), url("images/newyork_city.jpg"); }
+
+
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0
+}
+
+html {
+  scroll-behavior: smooth
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.65;
+  font-size: 1.05rem
+}
+
+a {
+  color: inherit
+}
+
+:focus-visible {
+  outline: 3px solid var(--saffron);
+  outline-offset: 3px
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem 2rem;
+  padding: .9rem 5vw;
+  background: var(--ink);
+  color: #fff
+}
+
+.brand {
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: 1.35rem;
+  text-decoration: none;
+  letter-spacing: .01em
+}
+
+.brand span {
+  color: var(--saffron)
+}
+
+.navbar ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .25rem;
+  list-style: none
+}
+
+.navbar li a {
+  display: block;
+  padding: .45rem 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 500;
+  color: #cfdcdf;
+  transition: background .2s, color .2s
+}
+
+.navbar li a:hover {
+  background: rgba(255, 255, 255, .12);
+  color: #fff
+}
+
+.navbar li a.active {
+  background: var(--saffron);
+  color: var(--ink)
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  color: #fff;
+  background: var(--hero);
+  padding: 7rem 5vw 9rem;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 9rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, .35), transparent)
+}
+
+.hero>* {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin-inline: auto
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: clamp(3.4rem, 13vw, 10rem);
+  line-height: .9;
+  letter-spacing: -.03em
+}
+
+.hero p {
+  max-width: 34rem;
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  color: #f1f1f1
+}
+
+.home-hero h1 {
+  font-size: clamp(2.8rem, 9vw, 7rem)
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: .85rem 1.6rem;
+  border-radius: 6px;
+  background: var(--saffron);
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform .2s
+}
+
+.btn:hover {
+  transform: translateY(-2px)
+}
+
+/* ---------- Ticket (quick facts) ---------- */
+.ticket {
+  position: relative;
+  z-index: 2;
+  max-width: 1000px;
+  margin: -5.5rem auto 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(18, 41, 47, .18);
+  overflow: hidden
+}
+
+.ticket div {
+  padding: 1.4rem 1.6rem;
+  border-right: 2px dashed #d5e0e2
+}
+
+.ticket div:last-child {
+  border-right: 0
+}
+
+.ticket small {
+  display: block;
+  color: var(--muted);
+  font-size: .85rem
+}
+
+.ticket strong {
+  font-family: var(--serif);
+  font-size: 1.3rem
+}
+
+.ticket-wrap {
+  padding: 0 5vw
+}
+
+/* ---------- Sections ---------- */
+main {
+  padding-bottom: 4rem
+}
+
+section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4.5rem 5vw 0
+}
+
+h2 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  max-width: 22ch
+}
+
+.lead {
+  max-width: 60ch;
+  color: var(--muted)
+}
+
+/* Highlights */
+.grid {
+  display: grid;
+  gap: 1.6rem;
+  margin-top: 2.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(18, 41, 47, .08)
+}
+
+.card .swatch {
+  height: 150px;
+  background: var(--hero);
+  background-size: cover;
+  background-position: center;
+  
+}
+
+/* ---- Paris cards ---- */
+body.paris .card:nth-child(1) .swatch{ background-image:url("images/paris_images/eiffel.jpg"); }
+body.paris .card:nth-child(2) .swatch{ background-image:url("images/paris_images/paris_louvre.jpg"); }
+body.paris .card:nth-child(3) .swatch{ background-image:url("images/paris_images/paris_montmartre_church.jpg"); }
+body.paris .card:nth-child(4) .swatch{ background-image:url("images/paris_images/paris_seine_river.jpg"); }
+
+/* ---- Tokyo cards ---- */
+body.tokyo .card:nth-child(1) .swatch{ background-image:url("images/tokyo_images/tokyo_shibuya.jpg"); }
+body.tokyo .card:nth-child(2) .swatch{ background-image:url("images/tokyo_images/tokyo_sensoji.jpg"); }
+body.tokyo .card:nth-child(3) .swatch{ background-image:url("images/tokyo_images/tokyo_meiji.jpg"); }
+body.tokyo .card:nth-child(4) .swatch{ background-image:url("images/tokyo_images/tokyo_akihabara.jpg"); }
+
+/* ---- New York cards ---- */
+body.newyork .card:nth-child(1) .swatch{ background-image:url("images/newyork_images/newyork_liberty.jpg"); }
+body.newyork .card:nth-child(2) .swatch{ background-image:url("images/newyork_images/newyork_centralpark.jpg"); }
+body.newyork .card:nth-child(3) .swatch{ background-image:url("images/newyork_images/newyork_timesquare.jpg"); }
+body.newyork .card:nth-child(4) .swatch{ background-image:url("images/newyork_images/newyork_brooklynbridge.jpg"); }
+
+.card .body {
+  padding: 1.3rem 1.4rem 1.6rem
+}
+
+.card h3 {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  margin-bottom: .4rem
+}
+
+.card p {
+  color: var(--muted);
+  font-size: .98rem
+}
+
+/* Itinerary: a real sequence, so days are numbered */
+.days {
+  list-style: none;
+  margin-top: 2rem;
+  border-left: 3px solid var(--accent);
+  padding-left: 1.8rem;
+  display: grid;
+  gap: 1.6rem
+}
+
+.days li {
+  position: relative
+}
+
+.days li::before {
+  content: "";
+  position: absolute;
+  left: calc(-1.8rem - 9px);
+  top: .45rem;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 3px solid var(--accent)
+}
+
+.days b {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  display: block
+}
+
+.days span {
+  color: var(--muted)
+}
+
+/* Food band */
+.band {
+  margin-top: 4.5rem;
+  background: var(--ink);
+  color: #fff;
+  padding: 3.5rem 5vw
+}
+
+.band .inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))
+}
+
+.band h2 {
+  grid-column: 1/-1;
+  color: #fff
+}
+
+.band h3 {
+  font-family: var(--serif);
+  color: var(--saffron);
+  margin-bottom: .3rem
+}
+
+.band p {
+  color: #c9d7da;
+  font-size: .98rem
+}
+
+/* Home: destination tiles */
+.tiles {
+  display: grid;
+  gap: 1.6rem;
+  margin-top: 2.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 360px;
+  padding: 1.8rem;
+  border-radius: 14px;
+  color: #fff;
+  text-decoration: none;
+  background: var(--hero);
+  transition: transform .25s
+}
+
+.tile:hover {
+  transform: translateY(-6px)
+}
+
+.tile h3 {
+  font-family: var(--serif);
+  font-size: 2.4rem;
+  line-height: 1
+}
+
+.tile p {
+  margin-top: .5rem;
+  color: #f0f0f0;
+  font-size: .98rem
+}
+
+.tile.paris {
+  --hero: linear-gradient(160deg, #3b1d3f, #C8466B 60%, #F2B134 130%)
+}
+
+.tile.tokyo {
+  --hero: linear-gradient(160deg, #0d1b2a, #1b3a5c 55%, #B3262E 130%)
+}
+
+.tile.newyork {
+  --hero: linear-gradient(160deg, #12292F, #0F5C6B 60%, #F2B134 135%)
+}
+
+.tile.paris   { background-image: linear-gradient(rgba(0,0,0,.15), rgba(0,0,0,.6)), url("images/paris_city.jpg"); background-size:cover; background-position:center; }
+.tile.tokyo   { background-image: linear-gradient(rgba(0,0,0,.15), rgba(0,0,0,.6)), url("images/tokyo_city.jpg"); background-size:cover; background-position:center; }
+.tile.newyork { background-image: linear-gradient(rgba(0,0,0,.15), rgba(0,0,0,.6)), url("images/newyork_city.jpg"); background-size:cover; background-position:center; }
+
+.tips {
+  display: grid;
+  gap: 1.6rem;
+  margin-top: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))
+}
+
+.tips div {
+  border-top: 4px solid var(--saffron);
+  padding-top: 1rem
+}
+
+.tips h3 {
+  font-family: var(--serif);
+  margin-bottom: .3rem
+}
+
+.tips p {
+  color: var(--muted)
+}
+
+/* Other cities link */
+.next {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem
+}
+
+.next a {
+  padding: .8rem 1.4rem;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background .2s, color .2s
+}
+
+.next a:hover {
+  background: var(--ink);
+  color: #fff
+}
+
+footer {
+  text-align: center;
+  padding: 2rem 5vw;
+  background: var(--ink);
+  color: #9fb3b8;
+  font-size: .95rem
+}
+
+@media(max-width:640px) {
+  .hero {
+    padding: 4.5rem 6vw 8rem
+  }
+
+  .ticket div {
+    border-right: 0;
+    border-bottom: 2px dashed #d5e0e2
+  }
+
+  .ticket div:last-child {
+    border-bottom: 0
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  * {
+    transition: none !important;
+    scroll-behavior: auto !important
+  }
+}
